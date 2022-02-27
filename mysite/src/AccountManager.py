@@ -20,11 +20,11 @@ def addAccount(email, pwd):
         ulist = email.split("@")
         username = ulist[0]
         domain = ulist[1]
-        ds = domain.rfind(".")
-
-        # if valid e-mail: 'foo@foomail.fong'
-        if not len(username) > 0:
-            print("Invalid e-mail")
+        ds = domain.rsplit(".")
+        domain_address = ds[0]
+        domain_type = ds[1]
+        # if valid e-mail like: 'foo@foomail.fong'
+        if not (len(username) > 0 and len(domain_address) > 0 and len(domain_type) > 0):
             raise AccountError("Invalid e-mail address entered!")
     else:
         raise AccountError("Must enter valid e-mail address!")
