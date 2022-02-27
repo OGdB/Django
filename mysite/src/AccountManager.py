@@ -15,26 +15,26 @@ def addAccount(email, pwd):
     if not isinstance(pwd, str) or len(pwd.strip()) <= 0: # no password
         raise AccountError("Must enter a password!")
         
-    # if valid input
+    # if valid input:
+        # look for 1 @ sign:
+            # string of input on left of @,
+            # string of input on right of @,
+            # require exactly 1 . which must be on right side of @,
+            # must be at least one character between @ and dot,
+            # must be at least one character after dot.
     if email.count("@") == 1:
         ulist = email.split("@")
         username = ulist[0]
         domain = ulist[1]
-        ds = domain.rsplit(".")
+        ds = domain.rsplit(".")  # split right side of @ at last dot.
         domain_address = ds[0]
         domain_type = ds[1]
-        # if valid e-mail like: 'foo@foomail.fong'
+
+        # if valid e-mail e.g: 'foo@foomail.fong'
         if not (len(username) > 0 and len(domain_address) > 0 and len(domain_type) > 0):
             raise AccountError("Invalid e-mail address entered!")
     else:
-        raise AccountError("Must enter valid e-mail address!")
-
-    # look for 1 @ sign
-        # string of input on left of @
-        # string of input on right of @
-        # require exactly 1 . which must be on right side of @
-        # must be at least one character between @ and dot
-        # must be at least one character after dot
+        raise AccountError("Must enter valid e-mail address with one @-sign!")
 
     if email in accounts:
         raise AccountError("Username already exists!")
