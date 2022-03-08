@@ -51,6 +51,9 @@ class T(TestCase):
         self.assertEqual(resp.status_code, http.HTTPStatus.BAD_REQUEST,
         "should return bad request as there is no domain type after dot.")
 
-    def testDuplicateRegistration(self):
+    def testDuplicateRegistrationLogin(self):
         resp = utils.addAccount("bob@duplicatemail.org","asecret")
+        self.assertEqual(resp.status_code, http.HTTPStatus.OK)
         resp2 = utils.addAccount("bob@duplicatemail.org","asecret2")
+        self.assertEqual(resp2.status_code, http.HTTPStatus.BAD_REQUEST,
+        "should return bad request; username already registered")
