@@ -18,10 +18,12 @@ from django.urls import path
 import src.home
 import src.about
 import src.register
+import src.user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', src.home.showHomePage ),
     path('about', src.about.view ),
     path('register', src.register.register ),
+    path('who', src.user.getuser ),
 ]

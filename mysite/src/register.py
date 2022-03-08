@@ -11,8 +11,13 @@ def register(req):
     pwd = req.POST.get("password")
     
     try:
-        AccountManager.addAccount(uname, pwd)
-        return django.http.HttpResponse("OK")
-        
+        if uname not in AccountManager.accounts:
+            AccountManager.addAccount(uname, pwd)
+            req.session["user"]=uname 
+            req.session.modified = True # tell Django to update session data
+            return django.http.HttpResponse("OK")
+        else:
+            return django.http.HttpResponseBadRequest()
+
     except AccountManager.AccountError as e:
         return django.http.HttpResponseBadRequest()
