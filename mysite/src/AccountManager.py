@@ -10,6 +10,7 @@ class Account:
 accounts = {}
 
 def addAccount(email, pwd):
+    """Add account to accounts, if the input was valid"""
     if not isinstance(email, str) or len(email.strip()) <= 0: # no username
         raise AccountError("Must enter a username!")
     if not isinstance(pwd, str) or len(pwd.strip()) <= 0: # no password

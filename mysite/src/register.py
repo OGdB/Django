@@ -17,7 +17,7 @@ def register(req):
             req.session.modified = True # tell Django to update session data
             return django.http.HttpResponse("OK")
         else:
-            return django.http.HttpResponseBadRequest()
+            raise AccountManager.AccountError("Username already in use!")
 
     except AccountManager.AccountError as e:
         return django.http.HttpResponseBadRequest()
